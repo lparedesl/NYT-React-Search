@@ -1,11 +1,42 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+const Article = require('../models/Article');
 
 mongoose.Promise = global.Promise;
 
 // Get All Saved Articles
 router.get('/saved', (req, res, next) => {
 
+});
+
+router.post('/check-if-saved', (req, res, next) => {
+    const articles = req.body;
+    checkIfSaved(0, articles, data => {
+        res.json(data);
+    });
+
+    function checkIfSaved(i, docs, cb) {
+        if (i < docs.length) {
+            docs[i].saved = false;
+            const promise = Article.findById(docs[i]._id).exec();
+            promise.then(doc => {
+                if (doc) {
+                    console.log('FOUND!!!', docs[i]._id);
+                    docs[i].saved = true;
+                }
+
+                i++;
+                if (i === docs.length) {
+                    cb(docs);
+                }
+                checkIfSaved(i, docs, cb);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+    }
 });
 
 // Save an Article

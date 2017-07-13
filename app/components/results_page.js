@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router-dom';
+import toastr from 'toastr';
 import {fetchArticles} from '../actions';
+import {saveArticle} from '../actions';
 import ArticlePanel from './article_panel';
 
 class ArticleResults extends Component {
@@ -20,7 +22,24 @@ class ArticleResults extends Component {
     }
 
     onArticleSave(values) {
-
+        this.props.saveArticle(values, (doc) => {
+            if (doc.data) {
+                toastr.options = {
+                    closeButton    : true,
+                    debug          : false,
+                    positionClass  : "toast-bottom-right",
+                    showDuration   : 1000,
+                    hideDuration   : 1000,
+                    timeOut        : 5000,
+                    extendedTimeOut: 1000,
+                    showEasing     : "swing",
+                    hideEasing     : "linear",
+                    showMethod     : "fadeIn",
+                    hideMethod     : "fadeOut"
+                };
+                toastr['success'](`"${doc.data.topic}" was successfully saved.`, 'Article Saved');
+            }
+        });
     }
 
     renderArticles() {
@@ -45,6 +64,7 @@ class ArticleResults extends Component {
                 article={articleObj}
                 buttonTxt={article.saved ? 'Saved' : 'Save'}
                 key={article._id}
+                saved={article.saved}
                 onArticleSave={this.onArticleSave}
             />;
         });
@@ -86,7 +106,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        fetchArticles
+        fetchArticles,
+        saveArticle
     }, dispatch);
 }
 
