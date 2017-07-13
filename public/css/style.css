@@ -1,8 +1,27 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    /*padding: 50px;*/
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+.jumbotron {
+    vertical-align: middle !important;
+    text-align: center !important;
+    background-color: #87a6c6;
+    color: #2d2626;
+}
+
+form a {
+    margin-left: 5px;
+}
+
+.results-menu, .card {
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    background-color: transparent;
 }
