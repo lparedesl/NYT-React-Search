@@ -45,8 +45,6 @@ class ArticleResults extends Component {
     renderArticles() {
         const {articles} = this.props;
 
-        console.log(articles);
-
         if (!articles) {
             return <div>Loading...</div>;
         }
