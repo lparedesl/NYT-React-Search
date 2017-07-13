@@ -63,7 +63,13 @@ router.post('/save-article', (req, res, next) => {
 
 // Delete a saved Article
 router.post('/delete-article/:id', (req, res, next) => {
-
+    const promise = Article.findByIdAndRemove(req.params.id).exec();
+    promise.then(docs => {
+        res.json(docs);
+    })
+           .catch(err => {
+               console.log(err);
+           });
 });
 
 module.exports = router;
