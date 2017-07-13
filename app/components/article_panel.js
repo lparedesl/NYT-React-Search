@@ -5,6 +5,8 @@ class ArticlePanel extends Component {
         super(props);
 
         this.state = {
+            deleted: false,
+            saved: this.props.saved,
             buttonTxt: this.props.buttonTxt
         };
     }
@@ -15,6 +17,29 @@ class ArticlePanel extends Component {
             buttonTxt: 'Saved'
         });
         this.props.onArticleSave(values);
+    }
+
+    onDelete(id) {
+        this.setState({
+            deleted: true
+        });
+        this.props.onArticleDelete(id);
+    }
+
+    renderBtn(article) {
+        if (this.props.fetchedArticle) {
+            return (
+                <button type="button" className="btn btn-primary" disabled={this.state.saved} onClick={() => this.onSave(article)}>
+                    {this.state.buttonTxt}
+                </button>
+            )
+        } else if (this.props.savedArticle) {
+            return (
+                <button type="button" className="btn btn-danger" onClick={() => this.onDelete(article._id)}>
+                    Delete
+                </button>
+            )
+        }
     }
 
     render() {
@@ -34,9 +59,7 @@ class ArticlePanel extends Component {
                                 </p>
                             </div>
                             <div className="col-md-2">
-                                <button type="button" className="btn btn-primary" onClick={() => this.onSave(article)}>
-                                    {this.state.buttonTxt}
-                                </button>
+                                {this.renderBtn(article)}
                             </div>
                         </div>
                     </div>
