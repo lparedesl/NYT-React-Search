@@ -7,7 +7,13 @@ mongoose.Promise = global.Promise;
 
 // Get All Saved Articles
 router.get('/saved', (req, res, next) => {
-
+    const promise = Article.find().exec();
+    promise.then(docs => {
+        res.json(docs);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 });
 
 router.post('/check-if-saved', (req, res, next) => {
