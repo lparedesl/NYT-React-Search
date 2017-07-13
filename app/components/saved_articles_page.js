@@ -8,7 +8,7 @@ import {fetchSavedArticles} from '../actions';
 import {deleteArticle} from '../actions';
 import ArticlePanel from './article_panel';
 
-class ArticleResults extends Component {
+class SavedArticles extends Component {
     constructor(props) {
         super(props);
 
@@ -95,4 +95,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleResults);
+export default connect(mapStateToProps, mapDispatchToProps)(SavedArticles);
