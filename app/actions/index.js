@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const SET_SEARCH_VALUES = 'search_values';
 export const FETCH_ARTICLES = 'fetch_articles';
+export const SAVE_ARTICLE = 'save_article';
 const ROOT_URL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
 const API_KEY = '67ded535ef3743c38b8d47bc94e8b6cd';
 
@@ -28,6 +29,16 @@ export function fetchArticles(values) {
 
     return {
         type: FETCH_ARTICLES,
+        payload: request
+    };
+}
+
+export function saveArticle(values, cb) {
+    const request = axios.post('/api/save-article', values)
+                         .then(doc => cb(doc));
+
+    return {
+        type: SAVE_ARTICLE,
         payload: request
     };
 }

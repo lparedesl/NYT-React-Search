@@ -41,7 +41,18 @@ router.post('/check-if-saved', (req, res, next) => {
 
 // Save an Article
 router.post('/save-article', (req, res, next) => {
-
+    Article.findById(req.body._id, (err, doc) => {
+        if (err) throw err;
+        if (!doc) {
+            const article = new Article(req.body);
+            article.save((err, doc) => {
+                if (err) throw err;
+                res.json(doc);
+            });
+        } else {
+            res.end();
+        }
+    });
 });
 
 // Delete a saved Article
