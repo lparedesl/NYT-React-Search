@@ -45,7 +45,7 @@ class ArticleSearch extends Component {
                     </div>
                 </div>
                 <div className="row clearfix">
-                    <div className="col-md-12">
+                    <div className="col-md-6 offset-md-3 col-xs-12">
                         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                             <Field
                                 label="Topic"

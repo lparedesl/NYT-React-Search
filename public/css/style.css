@@ -25,3 +25,9 @@ form a {
 .breadcrumb {
     background-color: transparent;
 }
+
+@media (max-width: 768px) {
+    .col-md-2.text-md-center.text-sm-left {
+        margin-top: 20px;
+    }
+}

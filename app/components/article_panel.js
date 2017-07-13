@@ -58,7 +58,7 @@ class ArticlePanel extends Component {
                                              target="_blank">{article.url}</a>
                                 </p>
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-md-2 text-md-center text-sm-left">
                                 {this.renderBtn(article)}
                             </div>
                         </div>
